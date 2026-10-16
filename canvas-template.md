@@ -1,24 +1,84 @@
 # Digital Health Innovation Canvas — Project Template
 
-> Copy this file into your own project. Read [`canvas.md`](canvas.md) first — this template only makes sense with the reasoning behind each question.
+> Copy this file into your own project. Read [`canvas.md`](canvas.md) first — this template only makes sense with the reasoning behind each question. A structured JSON version of this same template is [`schema.json`](schema.json).
 
-**Project name:**
-**Date filled / last revisited:**
-**Filled by:**
+**Project Name:**
+**Author By:**
+**Date:**
+
+---
+
+## Governance Spine — Safety, Compliance & Technology Framework
+
+> Fill this section first. Do not proceed to Discover until every pillar has an answer — including "this is a known gap" where that is the honest answer.
+
+### 1. Regulatory Pathway
+
+**Classification (SaMD / SiMD / non-clinical wellness tool) and risk tier (low / moderate / high):**
+
+**Regulatory sandbox or pre-market pathway, if any (name the gap if none exists):**
+
+**Local-content / procurement constraints, if any:**
+
+**Quality & safety standards in scope (ISO 13485 / IEC 62304 / ISO 14971 / other):**
+
+### 2. Clinical Governance
+
+**Governing clinical/treatment protocol:**
+
+**Patient safety model — what happens when the system is wrong, offline, or unavailable, and who is accountable:**
+
+**Adverse event / near-miss reporting pathway:**
+
+### 3. Data Governance
+
+**Legal basis for data collection and processing (name the gap if no sector-specific law applies):**
+
+**Consent model (how, when, in what language/modality, and can it be withdrawn):**
+
+**Security and residency (where stored, who can access):**
+
+**Data fate if the project, funder, or organisation ends:**
+
+### 4. Tech Governance
+
+**Architecture and interoperability (DHIS2 / national HMIS / FHIR / other standards):**
+
+**Cybersecurity controls:**
+
+**API model (REST/FHIR, auth, transport security):**
+
+**Disaster recovery / business continuity — does the underlying health workflow survive this system going down?**
+
+**Gate check — can every pillar above be answered, with gaps named rather than skipped? If not, stop here.**
 
 ---
 
 ## Phase 1 — Discover
 
-**Health system problem (in the owning institution's own terms, not technology terms):**
+### 1. Health Challenge
 
-**Who experiences this problem today, and what do they currently do about it?**
+**Health-system problem, in the owning institution's own terms, not technology terms:**
 
-**Existing system, register, or workflow this problem lives inside:**
+**Mechanism and barriers to solving it today:**
 
-**Accountable government or institutional owner, and confirmation they see this as a priority:**
+**Alignment with national health strategy / SDGs:**
 
-**Measurable definition of "no longer a problem":**
+### 2. User Profiles
+
+**Primary users and their demographic / digital-literacy profile:**
+
+**Current behaviours, motivations, workarounds:**
+
+**Urban/rural split and connectivity/literacy assumptions:**
+
+### 3. Stakeholder Map
+
+**Relevant government bodies:**
+
+**Clinical/professional bodies, payers, industry, academic partners:**
+
+**Accountable owner, and confirmation this is a priority:**
 
 **Gate check — can you name the owning institution, the existing workflow, and a measurable success definition? If not, stop here.**
 
@@ -26,15 +86,21 @@
 
 ## Phase 2 — Design
 
-**Minimum system that solves the Discover-stage problem for the owning institution, inside their existing workflow:**
+### 4. Solution Architecture
 
-**Interoperability requirements (DHIS2 / national HMIS / FHIR exchange / other):**
+**Which pillar this sits in, and whether it matches the Governance Spine's classification:**
 
-**Data governance model (access, storage, retention, what happens if the project ends):**
+### 5. User Experience
 
-**Clinical / operational safety model (behaviour when wrong, offline, or unavailable; who is accountable):**
+**Core features, reduced to the minimum that solves the Discover-stage problem:**
 
-**Who builds and maintains this, and is that sustainable past the pilot's funded lifetime?**
+**Accessibility (language, modality, offline/connectivity assumptions):**
+
+### 6. Enterprise Interoperability
+
+**Integration with national platform layer (DHIS2 / HMIS / FHIR) and facility-level systems:**
+
+**Terminology coding and offline-sync requirements:**
 
 **Gate check — is the solution designed inside a named governance, interoperability, and ownership model? If not, stop here.**
 
@@ -42,30 +108,40 @@
 
 ## Phase 3 — Deliver
 
-**Evidence this solution changed the outcome defined in Discover (not just that it was used):**
+### 7. Evidence Plan
 
-**What must be true structurally for the owning institution to run this without the original project team (staffing, budget line, regulatory approval, data-exchange agreement):**
+**Evidence pathway and endpoints:**
 
-**Has handover actually happened — documentation, training, named accountable owner?**
+**Study design, sample size, cost-effectiveness metrics:**
 
-**Plan and decision owner if adoption stalls at pilot scale:**
+### 8. Scale Strategy
 
-**Is this reusable by another team facing the same problem elsewhere?**
+**Go-to-market / go-to-government strategy beyond pilot sites:**
+
+**Change management and national-scale pathway, with a named decision owner:**
+
+### 9. Business Model
+
+**Revenue/sustainability model:**
+
+**Insurance/reimbursement pathway, if relevant:**
+
+**Unit economics at scale, including costs a pilot budget hides:**
 
 **Gate check — does a named institutional owner who did not build it now run this, with evidence it changed an outcome?**
 
 ---
 
-## Five Aims Check
+## Value Anchor — Five Aims
 
 Revisit this table at every phase, not just once.
 
 | Aim | Assessment |
 |---|---|
-| Population health | |
-| Patient / client experience | |
-| Provider / health worker satisfaction | |
-| Cost efficiency | |
-| Health equity | |
+| Health Equity | |
+| Population Health | |
+| Patient Experience | |
+| Provider Satisfaction | |
+| Cost Reduction | |
 
 **Weakest aim right now, and what you're doing about it:**

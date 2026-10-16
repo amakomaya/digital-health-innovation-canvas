@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Digital Health Innovation Canvas",
+  "description": "JSON schema for a filled Digital Health Innovation Canvas. See canvas.md for the reasoning behind each field, and canvas-template.md for the human-fillable equivalent. Field order below matches the intended fill order: metadata, then the Governance Spine (checked first, before Discover), then Discover, Design, Deliver, then the Value Anchor five aims.",
+  "type": "object",
+  "required": ["metadata", "sections"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Header fields every canvas carries, filled before any section.",
+      "required": ["projectName", "author", "date"],
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The initiative this canvas belongs to."
+        },
+        "author": {
+          "type": "string",
+          "description": "Who filled this canvas in, and is accountable for keeping it current. Labeled 'Author By' in the markdown template."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date last filled or revisited, YYYY-MM-DD."
+        }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "description": "Governance Spine fields are checked first and gate everything below. Discover, Design, and Deliver are phases, in order. Value Anchor fields are revisited at every phase.",
+      "required": [
+        "gov_regulatory", "gov_clinical", "gov_data", "gov_tech",
+        "disc_challenge", "disc_users", "disc_stakeholders",
+        "des_arch", "des_ux", "des_integration",
+        "del_evidence", "del_scale", "del_business",
+        "val_equity", "val_population", "val_patient", "val_provider", "val_cost"
+      ],
+      "properties": {
+        "gov_regulatory": {
+          "type": "string",
+          "title": "Regulatory Pathway",
+          "description": "Governance Spine, pillar 1. Classification (SaMD/SiMD/wellness), risk tier, regulatory sandbox or pre-market pathway (name the gap if none exists in-country), local-content/procurement constraints, and quality/safety standards in scope (ISO 13485, IEC 62304, ISO 14971)."
+        },
+        "gov_clinical": {
+          "type": "string",
+          "title": "Clinical Governance",
+          "description": "Governance Spine, pillar 2. Governing clinical/treatment protocol, patient safety model, adverse-event/near-miss reporting pathway."
+        },
+        "gov_data": {
+          "type": "string",
+          "title": "Data Governance",
+          "description": "Governance Spine, pillar 3. Legal basis for data processing (name the gap if no sector-specific law applies), consent model, security/residency, data fate if the project or organisation ends."
+        },
+        "gov_tech": {
+          "type": "string",
+          "title": "Tech Governance",
+          "description": "Governance Spine, pillar 4. Architecture and interoperability (national HMIS/DHIS2/FHIR or other standards), cybersecurity controls, API model, disaster recovery/business continuity."
+        },
+        "disc_challenge": {
+          "type": "string",
+          "title": "Health Challenge",
+          "description": "Discover, 1 of 3. The health-system problem in the owning institution's own terms, its mechanism and barriers, and alignment with national health strategy/SDGs."
+        },
+        "disc_users": {
+          "type": "string",
+          "title": "User Profiles",
+          "description": "Discover, 2 of 3. Primary users, demographic/digital-literacy profile, behaviours and workarounds, urban/rural and connectivity assumptions."
+        },
+        "disc_stakeholders": {
+          "type": "string",
+          "title": "Stakeholder Map",
+          "description": "Discover, 3 of 3. Relevant government bodies, clinical/professional bodies, payers, industry/academic partners, and the accountable owner."
+        },
+        "des_arch": {
+          "type": "string",
+          "title": "Solution Architecture",
+          "description": "Design, 1 of 3. Which pillar the solution sits in, and whether it matches the classification already named in the Governance Spine."
+        },
+        "des_ux": {
+          "type": "string",
+          "title": "User Experience",
+          "description": "Design, 2 of 3. Core features reduced to the Discover-stage minimum, and accessibility (language, modality, offline/connectivity assumptions)."
+        },
+        "des_integration": {
+          "type": "string",
+          "title": "Enterprise Interoperability",
+          "description": "Design, 3 of 3. Integration with the national platform layer and facility-level systems, terminology coding, offline-sync requirements."
+        },
+        "del_evidence": {
+          "type": "string",
+          "title": "Evidence Plan",
+          "description": "Deliver, 1 of 3. Evidence pathway and endpoints, study design, sample size, cost-effectiveness metrics."
+        },
+        "del_scale": {
+          "type": "string",
+          "title": "Scale Strategy",
+          "description": "Deliver, 2 of 3. Go-to-market/go-to-government strategy, change management, national-scale pathway and its decision owner."
+        },
+        "del_business": {
+          "type": "string",
+          "title": "Business Model",
+          "description": "Deliver, 3 of 3. Revenue/sustainability model, insurance/reimbursement pathway if relevant, unit economics at scale."
+        },
+        "val_equity": {
+          "type": "string",
+          "title": "Health Equity",
+          "description": "Value Anchor. Does this work as well for the hardest-to-reach population as for the easiest pilot site?"
+        },
+        "val_population": {
+          "type": "string",
+          "title": "Population Health",
+          "description": "Value Anchor. Does this move a population-level indicator, not just an individual encounter?"
+        },
+        "val_patient": {
+          "type": "string",
+          "title": "Patient Experience",
+          "description": "Value Anchor. Is this better for the person receiving care?"
+        },
+        "val_provider": {
+          "type": "string",
+          "title": "Provider Satisfaction",
+          "description": "Value Anchor. Does this reduce or add to the health worker's workload and cognitive burden?"
+        },
+        "val_cost": {
+          "type": "string",
+          "title": "Cost Reduction",
+          "description": "Value Anchor. What is the true cost of running this at scale, not the pilot-budget cost?"
+        }
+      }
+    }
+  }
+}
