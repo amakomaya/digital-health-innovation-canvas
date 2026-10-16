@@ -19,6 +19,7 @@ This framework is adapted for the Nepali and South Asian public health context f
 | [`canvas.md`](canvas.md) | The full framework: the three phases, the five aims, and the questions each one forces you to answer. |
 | [`canvas-template.md`](canvas-template.md) | A blank, fillable copy of the canvas for your own project. Copy it, don't edit the original. |
 | [`case-notes.md`](case-notes.md) | Worked examples from real Nepali health-informatics projects, showing how the canvas questions play out in practice. |
+| [`examples/aamako-maya-nepal.md`](examples/aamako-maya-nepal.md) | A genuine, fully filled-in canvas for a live product — Aamako Maya, Amakomaya's own reproductive, maternal & child health platform in Nepal — including its unresolved gaps, not just its strengths. |
 
 ## How to use it
 
@@ -26,6 +27,7 @@ This framework is adapted for the Nepali and South Asian public health context f
 2. Fill in **Discover** before you scope any build. If you can't answer its questions, you are not ready to design.
 3. Revisit the canvas at every major milestone — it is a living document, not a one-time form.
 4. Use `case-notes.md` to see how the questions apply to real HMIS/DHIS2/FHIR-style projects, not abstract ones.
+5. Read [`examples/aamako-maya-nepal.md`](examples/aamako-maya-nepal.md) for what a genuinely, candidly filled canvas looks like end to end — including the parts that don't flatter the product.
 
 ## License
 
