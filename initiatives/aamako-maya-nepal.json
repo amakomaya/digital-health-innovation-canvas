@@ -5,10 +5,10 @@
     "date": "2026-10-16"
   },
   "sections": {
-    "gov_regulatory": "- Non-clinical wellness tool today — no diagnostic/treatment claim; danger-sign triage is done by a human ANM, not software.\n- Classification is live, not fixed: PRAMS, SORS, and WHO Risk Score are already collected in DHIS2.\n- Switching on automated triage against those scores is named as the organisation's highest-value next act — which would reopen the classification question toward Class IIa clinical decision support.\n- Named gap: Nepal has no regulatory sandbox or SaMD classification framework.\n- Named gap: no ISO 13485/IEC 62304/ISO 14971 certification is evidenced.",
-    "gov_clinical": "- Danger signs are triaged by a human on the counselling line, not automatically — automated detection without a referral pathway is judged unsafe.\n- The same logic has kept mental-health screening and automated risk-score triage switched off.\n- Named gap: no single national maternal/newborn protocol repository to cite as 'the governing protocol' (no PNPK-equivalent in Nepal).\n- Named gap: no adverse-event/near-miss reporting pathway is evidenced in the organisation's own records.",
-    "gov_data": "- Stated policy: mother data is available only to the DHO, Government of Nepal, and the related health post/management — never publicly available, treated as a founding value.\n- Named gap: Nepal's closest law is the general Individual Privacy Act, 2075 (2018); there is no health-sector-specific data protection law, so this commitment currently rests on internal policy, not a health-data statute.\n- Named gap: consent-capture process is not formally documented.\n- Named gap: end-of-project data fate is not formally documented.",
-    "gov_tech": "- Counselling programme runs on the national DHIS2-based platform (19,699 enrolled, 160 data elements, 27 indicators), not a standalone database.\n- Four-tier access model (mother/FCHV/health post/DHO), with scoped third-party access for at least one partner.\n- Organisation separately holds FHIR R5 work (16 profiles, hmis.gov.np/fhir) at company level, but this product's own consumption of it is not evidenced.\n- Offline-first by design (historically micro-SD/shared-device distribution).\n- Named gap: no evidenced disaster-recovery/business-continuity policy for the platform side.",
+    "gov_regulatory": "eHealth Strategy 2017\n IHMIS Roadmap 2022–2030 \nNational AI Policy 2082 (2025, MoCIT)",
+    "gov_clinical": "Right to Safe Motherhood & Reproductive Health Act, 2075 (2018)\nNational Medical Standards for Maternal & Newborn Care (FWD/MoHP)",
+    "gov_data": "Individual Privacy Act 2075 + Regulation 2077\nElectronic Transactions Act 2063",
+    "gov_tech": "National Cyber Security Policy 2080 (2023, Cabinet/NCSC)\nElectronic Transactions Act 2063\nDHIS2 (MoHP/DoHS, since 2016)",
     "disc_challenge": "",
     "disc_users": "",
     "disc_stakeholders": "",

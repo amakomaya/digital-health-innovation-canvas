@@ -29,12 +29,57 @@
     @media print {
       @page {
         size: landscape;
-        margin: 0.5cm;
+        margin: 0.4cm;
       }
 
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+      html, body {
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .phase-card-break {
+        break-inside: avoid;
+      }
+
+      header, section, footer {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        margin-top: 8px !important;
+      }
+
+      #spineCards, #board, #anchorCards {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      #spineCards {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+
+      #board {
+        display: grid !important;
+        grid-template-columns: 1fr 22px 1fr 22px 1fr !important;
+        row-gap: 10px !important;
+      }
+
+      /* Keep the arrow spacers' grid slot reserved so Design/Deliver don't
+         shift into the wrong column — hide visually, don't remove from flow. */
+      #board > .no-print {
+        display: flex !important;
+        visibility: hidden !important;
+      }
+
+      #anchorCards {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
       }
     }
   </style>
@@ -42,8 +87,7 @@
 
 <body class="bg-slate-100 text-slate-800 font-sans">
 
-  <header class="relative bg-gradient-to-r from-[#1E46C4] to-[#4E80EC] text-white text-center py-8 px-5">
-    <span class="absolute top-3.5 right-4 text-xs font-bold tracking-wide opacity-80" id="versionTag">v1.0</span>
+  <header class="relative bg-gradient-to-r from-[#1E46C4] to-[#4E80EC] text-white text-center py-8 print:py-4 px-5 print:px-2">
     <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">Digital Health Innovation Canvas</h1>
     <p class="text-sm md:text-base opacity-90" id="subtitle">From Problem to Impact: a Governance-First Path to Scale
     </p>
@@ -64,26 +108,28 @@
     </div>
   </header>
 
-  <section class="bg-gradient-to-r from-[#E13A30] to-[#C21E1E] py-5 px-5">
+  <section class="bg-gradient-to-r from-[#E13A30] to-[#C21E1E] py-5 print:py-3 px-5 print:px-2">
     <span class="block text-center text-[11px] font-extrabold tracking-[0.18em] text-white/75 mb-1">GOVERNANCE</span>
     <h2 class="text-center text-white text-base md:text-lg font-extrabold tracking-wide mb-4">GOVERNANCE SPINE — Safety,
       Compliance &amp; Technology Framework</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 max-w-6xl mx-auto" id="spineCards"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 print:grid-cols-4 gap-3.5 max-w-6xl print:max-w-full mx-auto"
+      id="spineCards"></div>
   </section>
 
-  <section class="px-5 pt-7 pb-1">
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_30px_1fr_30px_1fr] gap-y-7 lg:gap-y-0 max-w-6xl mx-auto items-start"
+  <section class="px-5 print:px-2 pt-7 print:pt-3 pb-1">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_30px_1fr_30px_1fr] print:grid-cols-[1fr_24px_1fr_24px_1fr] gap-y-7 lg:gap-y-0 print:gap-y-2 max-w-6xl print:max-w-full mx-auto items-start"
       id="board"></div>
   </section>
 
-  <section class="bg-gradient-to-r from-[#F47D12] to-[#EE9007] py-5 px-5 mt-7">
+  <section class="bg-gradient-to-r from-[#F47D12] to-[#EE9007] py-5 print:py-3 px-5 print:px-2 mt-7 print:mt-3">
     <span class="block text-center text-[11px] font-extrabold tracking-[0.18em] text-white/75 mb-1">OUTCOME</span>
     <h2 class="text-center text-white text-base md:text-lg font-extrabold tracking-wide mb-4">VALUE ANCHOR — Quintuple
       Aim Outcomes</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 max-w-6xl mx-auto" id="anchorCards"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 print:grid-cols-5 gap-3.5 max-w-6xl print:max-w-full mx-auto"
+      id="anchorCards"></div>
   </section>
 
-  <footer class="bg-[#131A24] text-[#C9D0D8] py-5 px-5 flex flex-wrap gap-4 items-center justify-between">
+  <footer class="bg-[#131A24] text-[#C9D0D8] py-5 print:py-3 px-5 print:px-2 flex flex-wrap gap-4 items-center justify-between">
     <div class="flex gap-3.5 flex-wrap text-xs bg-white/5 rounded-lg px-3.5 py-2.5">
       <span class="font-extrabold tracking-widest text-[11px] text-white">MATURITY LEVELS</span>
       <span>○ Concept</span>
@@ -101,7 +147,7 @@
     </div>
   </footer>
 
-  <div class="print:hidden fixed bottom-4 right-4 flex gap-2.5">
+  <div class="no-print fixed bottom-4 right-4 flex gap-2.5">
     <button id="loadBtn" type="button" title="Load your own canvas JSON"
       class="inline-flex items-center gap-1.5 bg-white text-slate-900 border border-slate-900 px-4 py-2.5 rounded-full text-sm font-semibold cursor-pointer shadow-lg hover:bg-slate-50">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"

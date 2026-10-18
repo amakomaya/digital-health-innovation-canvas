@@ -129,7 +129,7 @@
       var a = answerList(sections, c.key, c.fallback);
       var textCls = a.filled ? "text-slate-800" : "text-[#8E1F1A]/70 italic";
       return (
-        '<div class="bg-[#FDEEEC] border border-[#F2B3AC] rounded-xl p-4 flex flex-col gap-2">' +
+        '<div class="phase-card-break bg-[#FDEEEC] border border-[#F2B3AC] rounded-xl p-4 flex flex-col gap-2">' +
         '<div class="flex items-center gap-2 font-extrabold text-sm text-[#8E1F1A]">' + icon(c.icon, "w-[18px] h-[18px]") + esc(c.title) + "</div>" +
         '<ul class="flex flex-col gap-1.5 text-xs ' + textCls + ' list-none p-0 m-0">' +
         a.lines.map(function (x) { return '<li class="leading-snug">• ' + linkify(x) + "</li>"; }).join("") +
@@ -144,7 +144,7 @@
     var a = answerList(sections, item.key, item.fallback);
     var textCls = a.filled ? "text-slate-800" : "text-slate-500 italic";
     return (
-      '<div class="bg-white border ' + v.border + ' rounded-xl overflow-hidden shadow-sm flex flex-col">' +
+      '<div class="phase-card-break bg-white border ' + v.border + ' rounded-xl overflow-hidden shadow-sm flex flex-col">' +
       '<div class="flex items-center gap-2 px-4 py-2.5 text-white font-extrabold text-sm bg-gradient-to-r ' + v.bar + '">' +
       icon(item.icon, "w-[18px] h-[18px]") + "<span>" + number + ". " + esc(item.title).toUpperCase() + "</span>" +
       "</div>" +
@@ -160,7 +160,7 @@
   function phaseFooter(items, variant) {
     var v = VARIANT[variant];
     return (
-      '<div class="rounded-xl border border-dashed ' + v.footBg + " " + v.footBorder + ' p-3.5 h-full flex flex-col">' +
+      '<div class="phase-card-break rounded-xl border border-dashed ' + v.footBg + " " + v.footBorder + ' p-3.5 h-full flex flex-col">' +
       '<span class="block text-[10.5px] font-extrabold tracking-widest uppercase text-slate-500 mb-1.5">Mindset &amp; Tools</span>' +
       '<ul class="flex flex-col gap-1 text-xs italic text-slate-700 list-none p-0 m-0">' +
       items.filter(function (it) { return it.tag; }).map(function (it) { return "<li>" + esc(it.tag) + "</li>"; }).join("") +
@@ -186,9 +186,9 @@
     var el = document.getElementById("board");
     var html = "";
     html += phaseColumn("discover", 1, "DISCOVER", DISCOVER, 1, sections);
-    html += '<div class="print:hidden hidden lg:flex items-center justify-center text-slate-400 self-stretch">' + arrowSvg.replace("<svg ", '<svg class="w-5 h-5" ') + "</div>";
+    html += '<div class="no-print hidden lg:flex items-center justify-center text-slate-400 self-stretch">' + arrowSvg.replace("<svg ", '<svg class="w-5 h-5" ') + "</div>";
     html += phaseColumn("design", 2, "DESIGN", DESIGN, 4, sections);
-    html += '<div class="print:hidden hidden lg:flex items-center justify-center text-slate-400 self-stretch">' + arrowSvg.replace("<svg ", '<svg class="w-5 h-5" ') + "</div>";
+    html += '<div class="no-print hidden lg:flex items-center justify-center text-slate-400 self-stretch">' + arrowSvg.replace("<svg ", '<svg class="w-5 h-5" ') + "</div>";
     html += phaseColumn("deliver", 3, "DELIVER", DELIVER, 7, sections);
     el.innerHTML = html;
   }
@@ -199,7 +199,7 @@
       var a = answerText(sections, c.key, c.fallback);
       var textCls = a.filled ? "text-slate-800" : "text-slate-500 italic";
       return (
-        '<div class="bg-[#FFF0DE] border border-[#F6CA93] rounded-xl p-3.5 text-center">' +
+        '<div class="phase-card-break bg-[#FFF0DE] border border-[#F6CA93] rounded-xl p-3.5 text-center">' +
         '<div class="flex items-center justify-center gap-1.5 font-extrabold text-[13.5px] text-[#8A4A09] mb-1">' + icon(c.icon, "w-4 h-4") + esc(c.title) + "</div>" +
         '<p class="text-xs text-slate-800 mb-1.5">' + esc(c.line) + "</p>" +
         '<p class="text-[11.5px] ' + textCls + '">' + linkify(a.text) + "</p>" +
