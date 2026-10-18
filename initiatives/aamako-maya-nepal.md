@@ -2,8 +2,8 @@
 
 **This is a genuine filled-in canvas for a live product**, not a retrospective illustration like the entries in [`case-notes.md`](../case-notes.md). It is maintained by Amakomaya, the product's owner, and will be revisited as the product changes. A structured JSON equivalent is at [`aamako-maya-nepal.json`](aamako-maya-nepal.json).
 
-**Project Name:** Aamako Maya (आमाको माया — "Mother's Love") — mother-facing app, toll-free midwife counselling service, FCHV/ANM field tool, and a national DHIS2-based counselling programme
-**Author By:** Amakomaya
+**Project Name:** RMNCH Program
+**Author By:** Aamako Maya (आमाको माया — "Mother's Love")
 **Date:** 2026-10-16
 
 ---
