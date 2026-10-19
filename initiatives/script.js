@@ -216,8 +216,16 @@
 
   renderAll({});
 
-  /* ---------- Data loading: defaults to the Aamako Maya initiative JSON,
-     then can be swapped for any user-supplied canvas JSON of the same shape. ---------- */
+  /* ---------- Data loading: Google Sheet (published, key/value rows) is the
+     default source. Falls back to the bundled aamako-maya-nepal.json if the
+     sheet can't be reached, then to bare metadata. A user-uploaded canvas
+     JSON (via "Use my data") always overrides whatever loaded automatically,
+     and "Export JSON" downloads whatever is currently displayed. ---------- */
+  /* Published-to-web CSV link (File > Share > Publish to web > Sheet1 > CSV).
+     Using the publish pipeline instead of the gviz export endpoint, which got
+     stuck serving a stale cached snapshot of this sheet and never refreshed. */
+  var GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Og29cw-jufHOovZhCi2Nko313rN533W8hsdXoYIZDRiJ9pmqzAjGBQzmozn1Papsexp3GBUqrPut/pub?gid=0&single=true&output=csv";
+
   var DEFAULT_DATA_URL = "aamako-maya-nepal.json";
   var FALLBACK_METADATA = {
     innovationName: "RMNCH Program",
@@ -225,9 +233,19 @@
     date: "2026-10-16"
   };
 
+  var SECTION_KEYS = [
+    "gov_regulatory", "gov_clinical", "gov_data", "gov_tech",
+    "disc_challenge", "disc_users", "disc_stakeholders",
+    "des_arch", "des_ux", "des_integration",
+    "del_evidence", "del_scale", "del_business",
+    "val_equity", "val_population", "val_patient", "val_provider", "val_cost"
+  ];
+  var META_KEYS = { project_name: "innovationName", projectname: "innovationName", innovationname: "innovationName", author: "author", date: "date" };
+
   var nameEl = document.getElementById("metaName");
   var authorEl = document.getElementById("metaAuthor");
   var dateEl = document.getElementById("metaDate");
+  var currentData = null;
 
   function formatDate(d) {
     if (!d) return "—";
@@ -237,6 +255,7 @@
   }
 
   function applyData(data, sourceLabel) {
+    currentData = data;
     var meta = (data && data.metadata) || {};
     nameEl.textContent = meta.innovationName || meta.projectName || "Untitled initiative";
     authorEl.textContent = meta.author || "—";
@@ -245,13 +264,73 @@
     renderAll((data && data.sections) || {});
   }
 
-  function loadDefault() {
+  /* Minimal RFC-4180 CSV parser: handles quoted fields, embedded commas/newlines, "" escapes. */
+  function parseCsv(text) {
+    var rows = [];
+    var row = [];
+    var field = "";
+    var inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else { inQuotes = false; }
+        } else {
+          field += c;
+        }
+      } else if (c === '"') {
+        inQuotes = true;
+      } else if (c === ",") {
+        row.push(field); field = "";
+      } else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(field); field = "";
+        rows.push(row); row = [];
+      } else {
+        field += c;
+      }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (cell) { return cell.trim() !== ""; }); });
+  }
+
+  /* key/value CSV rows -> canvas JSON shape {metadata:{...}, sections:{...}} */
+  function sheetRowsToCanvasData(rows) {
+    var metadata = {};
+    var sections = {};
+    rows.forEach(function (r) {
+      var rawKey = (r[0] || "").trim();
+      var value = (r[1] || "").trim();
+      if (!rawKey) return;
+      var key = rawKey.toLowerCase();
+      if (key === "key" && value.toLowerCase() === "value") return; // header row
+      if (META_KEYS[key]) {
+        metadata[META_KEYS[key]] = value;
+      } else if (SECTION_KEYS.indexOf(rawKey) !== -1) {
+        sections[rawKey] = value;
+      }
+    });
+    return { metadata: metadata, sections: sections };
+  }
+
+  function loadFromDefaultJson() {
     fetch(DEFAULT_DATA_URL)
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (data) { applyData(data, "Default: " + DEFAULT_DATA_URL); })
       .catch(function () {
-        applyData({ metadata: FALLBACK_METADATA, sections: {} }, "Default metadata only (" + DEFAULT_DATA_URL + " not reachable — open via a local server, or use \"Use my data\")");
+        applyData({ metadata: FALLBACK_METADATA, sections: {} }, "Default metadata only (nothing reachable — open via a local server, or use \"Use my data\")");
       });
+  }
+
+  function loadDefault() {
+    fetch(GOOGLE_SHEET_CSV_URL)
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(function (csvText) {
+        var data = sheetRowsToCanvasData(parseCsv(csvText));
+        applyData(data, "Google Sheet (published CSV)");
+      })
+      .catch(function () { loadFromDefaultJson(); });
   }
 
   loadDefault();
@@ -278,6 +357,25 @@
         fileInput.value = "";
       };
       reader.readAsText(file);
+    });
+  }
+
+  var exportBtn = document.getElementById("exportBtn");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", function () {
+      if (!currentData) return;
+      var meta = currentData.metadata || {};
+      var slugSource = meta.innovationName || meta.projectName || "canvas";
+      var slug = String(slugSource).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "canvas";
+      var blob = new Blob([JSON.stringify(currentData, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = slug + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     });
   }
 
